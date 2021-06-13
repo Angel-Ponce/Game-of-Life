@@ -30,23 +30,61 @@ public class GameOfLife extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         container = new javax.swing.JPanel();
+        boardContainer = new javax.swing.JPanel();
+        footerContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game of Life");
         setPreferredSize(new java.awt.Dimension(720, 512));
 
-        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
-        container.setLayout(containerLayout);
-        containerLayout.setHorizontalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        container.setBounds(new java.awt.Rectangle(0, 0, 100, 100));
+        container.setLayout(new java.awt.GridBagLayout());
+
+        boardContainer.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        boardContainer.setMinimumSize(new java.awt.Dimension(0, 0));
+
+        javax.swing.GroupLayout boardContainerLayout = new javax.swing.GroupLayout(boardContainer);
+        boardContainer.setLayout(boardContainerLayout);
+        boardContainerLayout.setHorizontalGroup(
+            boardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        containerLayout.setVerticalGroup(
-            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+        boardContainerLayout.setVerticalGroup(
+            boardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.9;
+        container.add(boardContainer, gridBagConstraints);
+
+        footerContainer.setBackground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout footerContainerLayout = new javax.swing.GroupLayout(footerContainer);
+        footerContainer.setLayout(footerContainerLayout);
+        footerContainerLayout.setHorizontalGroup(
+            footerContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        footerContainerLayout.setVerticalGroup(
+            footerContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.1;
+        container.add(footerContainer, gridBagConstraints);
 
         getContentPane().add(container, java.awt.BorderLayout.CENTER);
 
@@ -75,6 +113,8 @@ public class GameOfLife extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel boardContainer;
     private javax.swing.JPanel container;
+    private javax.swing.JPanel footerContainer;
     // End of variables declaration//GEN-END:variables
 }
