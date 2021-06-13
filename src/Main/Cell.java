@@ -19,12 +19,13 @@ public class Cell extends JLabel {
 
     private boolean state;
     private int xPos, yPos;
+    private Color live = new Color(0, 0, 0), dead = new Color(60, 63, 65);
 
     public Cell(boolean state, int xPos, int yPos) {
         this.state = state;
         this.xPos = xPos;
         this.yPos = yPos;
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         super.setOpaque(true);
         this.chooseBackgroud();
         this.events();
@@ -41,9 +42,9 @@ public class Cell extends JLabel {
 
     private void chooseBackgroud() {
         if (state) {
-            this.setBackground(new Color(0, 0, 0));
+            this.setBackground(live);
         } else {
-            this.setBackground(new Color(60, 63, 65));
+            this.setBackground(dead);
         }
     }
 
@@ -68,16 +69,21 @@ public class Cell extends JLabel {
             @Override
             public void mouseClicked(MouseEvent me) {
                 System.out.println("[x = " + xPos + "] [y = " + yPos + "]");
+                if (getState()) {
+                    setState(false);
+                }else{
+                    setState(true);
+                }
             }
 
             @Override
             public void mouseEntered(MouseEvent me) {
-                setBackground(new Color(0, 0, 0));
+                setBackground(live);
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                setBackground(new Color(60, 63, 65));
+                chooseBackgroud();
             }
         });
     }

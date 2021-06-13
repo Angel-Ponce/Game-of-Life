@@ -29,11 +29,13 @@ public class GameOfLife extends javax.swing.JFrame {
     }
 
     private void buildMatrix() {
+        //Creating cells
         for (int i = 0; i < 50; i++) {
             for (int j = 0; j < 40; j++) {
                 cells[i][j] = new Cell(false, i, j);
             }
         }
+        //Adding cells
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 50; j++) {
                 this.boardContainer.add(cells[j][i], -1);
