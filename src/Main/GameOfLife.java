@@ -6,6 +6,7 @@
 package Main;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -13,6 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author angel_p11
  */
 public class GameOfLife extends javax.swing.JFrame {
+    private final ImageIcon icon = new ImageIcon(getClass().getResource("/Images/icon.png"));
 
     /**
      * Creates new form GameOfLife
@@ -20,6 +22,7 @@ public class GameOfLife extends javax.swing.JFrame {
     public GameOfLife() {
         initComponents();
         super.setLocationRelativeTo(null);
+        super.setIconImage(icon.getImage());
     }
  
     /**
@@ -38,9 +41,11 @@ public class GameOfLife extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game of Life");
-        setPreferredSize(new java.awt.Dimension(720, 512));
+        setMinimumSize(new java.awt.Dimension(700, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(800, 600));
 
-        container.setBounds(new java.awt.Rectangle(0, 0, 100, 100));
+        container.setMinimumSize(new java.awt.Dimension(720, 512));
         container.setLayout(new java.awt.GridBagLayout());
 
         boardContainer.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
