@@ -14,7 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author angel_p11
  */
 public class GameOfLife extends javax.swing.JFrame {
+
     private final ImageIcon icon = new ImageIcon(getClass().getResource("/Images/icon.png"));
+    private final Cell[][] cells = new Cell[50][40];
 
     /**
      * Creates new form GameOfLife
@@ -23,8 +25,24 @@ public class GameOfLife extends javax.swing.JFrame {
         initComponents();
         super.setLocationRelativeTo(null);
         super.setIconImage(icon.getImage());
+        buildMatrix();
     }
- 
+
+    private void buildMatrix() {
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 40; j++) {
+                cells[i][j] = new Cell(false, i, j);
+            }
+        }
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 50; j++) {
+                this.boardContainer.add(cells[j][i], -1);
+            }
+        }
+        this.boardContainer.repaint();
+        this.pack();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +56,7 @@ public class GameOfLife extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
         boardContainer = new javax.swing.JPanel();
         footerContainer = new javax.swing.JPanel();
+        life = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game of Life");
@@ -50,18 +69,7 @@ public class GameOfLife extends javax.swing.JFrame {
 
         boardContainer.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         boardContainer.setMinimumSize(new java.awt.Dimension(0, 0));
-
-        javax.swing.GroupLayout boardContainerLayout = new javax.swing.GroupLayout(boardContainer);
-        boardContainer.setLayout(boardContainerLayout);
-        boardContainerLayout.setHorizontalGroup(
-            boardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        boardContainerLayout.setVerticalGroup(
-            boardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
+        boardContainer.setLayout(new java.awt.GridLayout(0, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -72,16 +80,8 @@ public class GameOfLife extends javax.swing.JFrame {
 
         footerContainer.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout footerContainerLayout = new javax.swing.GroupLayout(footerContainer);
-        footerContainer.setLayout(footerContainerLayout);
-        footerContainerLayout.setHorizontalGroup(
-            footerContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        footerContainerLayout.setVerticalGroup(
-            footerContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        life.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        footerContainer.add(life);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -121,5 +121,6 @@ public class GameOfLife extends javax.swing.JFrame {
     private javax.swing.JPanel boardContainer;
     private javax.swing.JPanel container;
     private javax.swing.JPanel footerContainer;
+    private javax.swing.JButton life;
     // End of variables declaration//GEN-END:variables
 }
