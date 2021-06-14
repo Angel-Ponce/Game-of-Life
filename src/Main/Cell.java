@@ -8,6 +8,7 @@ package Main;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 
 /**
@@ -20,6 +21,7 @@ public class Cell extends JLabel {
     private int xPos, yPos;
     private final Color live = new Color(0, 0, 0);
     private final Color dead = new Color(60, 63, 65);
+    private ArrayList<StateListener> stateListeners = new ArrayList();
 
     public Cell(boolean state, int xPos, int yPos) {
         this.state = state;
@@ -37,6 +39,9 @@ public class Cell extends JLabel {
     public void setState(boolean state) {
         this.state = state;
         this.chooseBackgroud();
+        this.stateListeners.forEach(sl -> {
+            sl.stateChanged(this);
+        });
     }
 
     private void chooseBackgroud() {
@@ -63,6 +68,10 @@ public class Cell extends JLabel {
         this.yPos = yPos;
     }
 
+    public void addStateListener(StateListener sl) {
+        this.stateListeners.add(sl);
+    }
+
     private void events() {
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -70,7 +79,7 @@ public class Cell extends JLabel {
                 System.out.println("[x = " + xPos + "] [y = " + yPos + "]");
                 if (getState()) {
                     setState(false);
-                }else{
+                } else {
                     setState(true);
                 }
             }
