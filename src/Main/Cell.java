@@ -8,7 +8,6 @@ package Main;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 /**
@@ -19,13 +18,13 @@ public class Cell extends JLabel {
 
     private boolean state;
     private int xPos, yPos;
-    private Color live = new Color(0, 0, 0), dead = new Color(60, 63, 65);
+    private final Color live = new Color(0, 0, 0);
+    private final Color dead = new Color(60, 63, 65);
 
     public Cell(boolean state, int xPos, int yPos) {
         this.state = state;
         this.xPos = xPos;
         this.yPos = yPos;
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         super.setOpaque(true);
         this.chooseBackgroud();
         this.events();
