@@ -98,8 +98,8 @@ public class GameOfLife extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Game of Life");
-        setMinimumSize(new java.awt.Dimension(700, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(600, 660));
+        setPreferredSize(new java.awt.Dimension(600, 610));
         setSize(new java.awt.Dimension(800, 600));
 
         container.setMinimumSize(new java.awt.Dimension(720, 512));
