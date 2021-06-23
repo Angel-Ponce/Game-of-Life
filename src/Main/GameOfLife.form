@@ -70,8 +70,9 @@
             <Component class="javax.swing.JButton" name="life">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/icon.png"/>
+                  <Image iconType="3" name="/Images/life.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Start the game"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lifeActionPerformed"/>
@@ -80,8 +81,9 @@
             <Component class="javax.swing.JButton" name="dead">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/icon.png"/>
+                  <Image iconType="3" name="/Images/dead.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Stop the game"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deadActionPerformed"/>
@@ -90,8 +92,9 @@
             <Component class="javax.swing.JButton" name="random">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/icon.png"/>
+                  <Image iconType="3" name="/Images/random.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Random life cells"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="randomActionPerformed"/>

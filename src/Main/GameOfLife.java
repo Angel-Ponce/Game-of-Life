@@ -18,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class GameOfLife extends javax.swing.JFrame {
 
-    private final ImageIcon icon = new ImageIcon(getClass().getResource("/Images/icon.png"));
+    private final ImageIcon icon = new ImageIcon(getClass().getResource("/Images/life.png"));
     private final int columns = 60;
     private final int rows = 60;
     private final Cell[][] cells = new Cell[rows][columns];
@@ -86,7 +86,8 @@ public class GameOfLife extends javax.swing.JFrame {
         footerContainer.setPreferredSize(new java.awt.Dimension(0, 0));
         footerContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
-        life.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        life.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/life.png"))); // NOI18N
+        life.setToolTipText("Start the game");
         life.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lifeActionPerformed(evt);
@@ -94,7 +95,8 @@ public class GameOfLife extends javax.swing.JFrame {
         });
         footerContainer.add(life);
 
-        dead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        dead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dead.png"))); // NOI18N
+        dead.setToolTipText("Stop the game");
         dead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deadActionPerformed(evt);
@@ -102,7 +104,8 @@ public class GameOfLife extends javax.swing.JFrame {
         });
         footerContainer.add(dead);
 
-        random.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        random.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/random.png"))); // NOI18N
+        random.setToolTipText("Random life cells");
         random.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 randomActionPerformed(evt);
