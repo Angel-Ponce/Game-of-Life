@@ -7,6 +7,7 @@ package Main;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,6 +23,8 @@ public class GameOfLife extends javax.swing.JFrame {
     private final int rows = 60;
     private final Cell[][] cells = new Cell[rows][columns];
     private final ArrayList<Cell> linealCells = new ArrayList();
+    private final ArrayList<Timer> timers = new ArrayList();
+    private final Random randomGenerator = new Random();
     private boolean simulate = false;
 
     /**
@@ -66,6 +69,8 @@ public class GameOfLife extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
         footerContainer = new javax.swing.JPanel();
         life = new javax.swing.JButton();
+        dead = new javax.swing.JButton();
+        random = new javax.swing.JButton();
         boardContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,6 +93,22 @@ public class GameOfLife extends javax.swing.JFrame {
             }
         });
         footerContainer.add(life);
+
+        dead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        dead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deadActionPerformed(evt);
+            }
+        });
+        footerContainer.add(dead);
+
+        random.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        random.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomActionPerformed(evt);
+            }
+        });
+        footerContainer.add(random);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -114,7 +135,7 @@ public class GameOfLife extends javax.swing.JFrame {
 
     private void lifeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lifeActionPerformed
         //Adding stateListener to cells
-        Timer timer = new Timer(500, (ActionEvent) -> {
+        Timer timer = new Timer(200, (ActionEvent) -> {
             ArrayList<Cell> cellLifes = new ArrayList();
             ArrayList<Cell> cellDeads = new ArrayList();
             linealCells.forEach((Cell cell) -> {
@@ -139,7 +160,28 @@ public class GameOfLife extends javax.swing.JFrame {
             cellDeads.forEach(c -> c.setState(false));
         });
         timer.start();
+        timers.add(timer);
     }//GEN-LAST:event_lifeActionPerformed
+
+    private void deadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deadActionPerformed
+        timers.forEach(t -> t.stop());
+        timers.clear();
+    }//GEN-LAST:event_deadActionPerformed
+
+    private void randomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomActionPerformed
+        ArrayList<Integer> randoms = new ArrayList();
+        while (randoms.size() < 1000) {
+            int random = randomGenerator.nextInt(3600);
+            if (verifyRandom(random, randoms)) {
+                randoms.add(random);
+            }
+        }
+        randoms.forEach(r -> linealCells.get(r).setState(true));
+    }//GEN-LAST:event_randomActionPerformed
+
+    public boolean verifyRandom(int random, ArrayList<Integer> randoms) {
+        return !randoms.stream().anyMatch((r) -> (random == r));
+    }
 
     /**
      * @param args the command line arguments
@@ -165,7 +207,9 @@ public class GameOfLife extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardContainer;
     private javax.swing.JPanel container;
+    private javax.swing.JButton dead;
     private javax.swing.JPanel footerContainer;
     private javax.swing.JButton life;
+    private javax.swing.JButton random;
     // End of variables declaration//GEN-END:variables
 }
