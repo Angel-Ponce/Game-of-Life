@@ -6,7 +6,9 @@
 package Main;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -19,6 +21,8 @@ public class GameOfLife extends javax.swing.JFrame {
     private final int columns = 60;
     private final int rows = 60;
     private final Cell[][] cells = new Cell[rows][columns];
+    private final ArrayList<Cell> linealCells = new ArrayList();
+    private boolean simulate = false;
 
     /**
      * Creates new form GameOfLife
@@ -28,6 +32,7 @@ public class GameOfLife extends javax.swing.JFrame {
         super.setLocationRelativeTo(null);
         super.setIconImage(icon.getImage());
         buildMatrix();
+
     }
 
     private void buildMatrix() {
@@ -35,9 +40,10 @@ public class GameOfLife extends javax.swing.JFrame {
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 cells[i][j] = new Cell(false, i, j);
+                linealCells.add(cells[i][j]);
             }
         }
-        //Adding cells
+        //Adding cells to board
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 this.boardContainer.add(cells[j][i], -1);
@@ -58,6 +64,8 @@ public class GameOfLife extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         container = new javax.swing.JPanel();
+        footerContainer = new javax.swing.JPanel();
+        life = new javax.swing.JButton();
         boardContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,6 +77,26 @@ public class GameOfLife extends javax.swing.JFrame {
         container.setMinimumSize(new java.awt.Dimension(720, 512));
         container.setLayout(new java.awt.GridBagLayout());
 
+        footerContainer.setBackground(new java.awt.Color(51, 51, 51));
+        footerContainer.setPreferredSize(new java.awt.Dimension(0, 0));
+        footerContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+
+        life.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon.png"))); // NOI18N
+        life.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lifeActionPerformed(evt);
+            }
+        });
+        footerContainer.add(life);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 0.1;
+        container.add(footerContainer, gridBagConstraints);
+
         boardContainer.setMinimumSize(new java.awt.Dimension(0, 0));
         boardContainer.setLayout(new java.awt.GridLayout(0, 60));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -76,13 +104,42 @@ public class GameOfLife extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weighty = 0.9;
         container.add(boardContainer, gridBagConstraints);
 
         getContentPane().add(container, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lifeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lifeActionPerformed
+        //Adding stateListener to cells
+        Timer timer = new Timer(500, (ActionEvent) -> {
+            ArrayList<Cell> cellLifes = new ArrayList();
+            ArrayList<Cell> cellDeads = new ArrayList();
+            linealCells.forEach((Cell cell) -> {
+                int size = 0;
+                for (Cell cn : cell.getNeighbors(cells)) {
+                    if (cn.getState()) {
+                        size++;
+                    }
+                }
+                if (cell.getState()) {
+                    if (size < 2 | size > 3) {
+                        cellDeads.add(cell);
+                    }
+                } else {
+                    if (size == 3) {
+                        cellLifes.add(cell);
+                    }
+                }
+
+            });
+            cellLifes.forEach(c -> c.setState(true));
+            cellDeads.forEach(c -> c.setState(false));
+        });
+        timer.start();
+    }//GEN-LAST:event_lifeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,5 +165,7 @@ public class GameOfLife extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardContainer;
     private javax.swing.JPanel container;
+    private javax.swing.JPanel footerContainer;
+    private javax.swing.JButton life;
     // End of variables declaration//GEN-END:variables
 }

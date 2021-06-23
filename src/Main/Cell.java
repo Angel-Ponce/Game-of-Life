@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+//import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 /**
@@ -21,7 +22,7 @@ public class Cell extends JLabel {
     private int xPos, yPos;
     private final Color live = new Color(0, 0, 0);
     private final Color dead = new Color(60, 63, 65);
-    private ArrayList<StateListener> stateListeners = new ArrayList();
+    private final ArrayList<StateListener> stateListeners = new ArrayList();
 
     public Cell(boolean state, int xPos, int yPos) {
         this.state = state;
@@ -70,6 +71,51 @@ public class Cell extends JLabel {
 
     public void addStateListener(StateListener sl) {
         this.stateListeners.add(sl);
+    }
+
+    public ArrayList<Cell> getNeighbors(Cell[][] cells) {
+        ArrayList<Cell> neighbors = new ArrayList();
+        try {
+            neighbors.add(cells[xPos - 1][yPos - 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos][yPos - 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos + 1][yPos - 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos - 1][yPos]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos + 1][yPos]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos - 1][yPos + 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos][yPos + 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        try {
+            neighbors.add(cells[xPos + 1][yPos + 1]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            //Nothing
+        }
+        return neighbors;
     }
 
     private void events() {
