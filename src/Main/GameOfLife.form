@@ -84,6 +84,7 @@
                   <Image iconType="3" name="/Images/dead.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Stop the game"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deadActionPerformed"/>

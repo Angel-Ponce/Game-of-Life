@@ -27,7 +27,7 @@ public class GameOfLife extends javax.swing.JFrame {
     private final int rows = 60;
     private final Cell[][] cells = new Cell[rows][columns];
     private final ArrayList<Cell> linealCells = new ArrayList();
-    private final ArrayList<Timer> timers = new ArrayList();
+    private Timer timer;
     private final Random randomGenerator = new Random();
     private boolean simulate = false;
 
@@ -120,6 +120,7 @@ public class GameOfLife extends javax.swing.JFrame {
 
         dead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dead.png"))); // NOI18N
         dead.setToolTipText("Stop the game");
+        dead.setEnabled(false);
         dead.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deadActionPerformed(evt);
@@ -161,7 +162,9 @@ public class GameOfLife extends javax.swing.JFrame {
 
     private void lifeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lifeActionPerformed
         //Adding stateListener to cells
-        Timer timer = new Timer(200, (ActionEvent) -> {
+        life.setEnabled(false);
+        dead.setEnabled(true);
+        timer = new Timer(200, (ActionEvent) -> {
             ArrayList<Cell> cellLifes = new ArrayList();
             ArrayList<Cell> cellDeads = new ArrayList();
             linealCells.forEach((Cell cell) -> {
@@ -186,12 +189,12 @@ public class GameOfLife extends javax.swing.JFrame {
             cellDeads.forEach(c -> c.setState(false));
         });
         timer.start();
-        timers.add(timer);
     }//GEN-LAST:event_lifeActionPerformed
 
     private void deadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deadActionPerformed
-        timers.forEach(t -> t.stop());
-        timers.clear();
+        dead.setEnabled(false);
+        life.setEnabled(true);
+        timer.stop();
     }//GEN-LAST:event_deadActionPerformed
 
     private void randomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomActionPerformed
