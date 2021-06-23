@@ -22,7 +22,6 @@ public class Cell extends JLabel {
     private int xPos, yPos;
     private final Color live = new Color(0, 0, 0);
     private final Color dead = new Color(60, 63, 65);
-    private final ArrayList<StateListener> stateListeners = new ArrayList();
 
     public Cell(boolean state, int xPos, int yPos) {
         this.state = state;
@@ -40,9 +39,6 @@ public class Cell extends JLabel {
     public void setState(boolean state) {
         this.state = state;
         this.chooseBackgroud();
-        this.stateListeners.forEach(sl -> {
-            sl.stateChanged(this);
-        });
     }
 
     private void chooseBackgroud() {
@@ -67,10 +63,6 @@ public class Cell extends JLabel {
 
     public void setyPos(int yPos) {
         this.yPos = yPos;
-    }
-
-    public void addStateListener(StateListener sl) {
-        this.stateListeners.add(sl);
     }
 
     public ArrayList<Cell> getNeighbors(Cell[][] cells) {
