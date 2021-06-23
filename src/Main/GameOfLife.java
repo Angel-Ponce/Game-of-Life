@@ -6,8 +6,12 @@
 package Main;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -52,6 +56,25 @@ public class GameOfLife extends javax.swing.JFrame {
                 this.boardContainer.add(cells[j][i], -1);
             }
         }
+        //Ading mous hover to view neighbors of cells
+        linealCells.forEach((Cell cell) -> {
+            cell.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent me) {
+                    cell.getNeighbors(cells).forEach((Cell c) -> {
+                        c.setBorder(BorderFactory.createLineBorder(Color.GREEN, 1));
+                    });
+                }
+
+                @Override
+                public void mouseExited(MouseEvent me) {
+                    cell.getNeighbors(cells).forEach((Cell c) -> {
+                        c.setBorder(null);
+                    });
+                }
+            });
+        });
+
         this.boardContainer.repaint();
         this.pack();
     }
