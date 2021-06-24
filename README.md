@@ -5,6 +5,7 @@ The game of life is a math game created by [John Horton](https://es.wikipedia.or
 - If a live cell has 2 or 3 cell neighbors with life, this cell can continue to live.
 - If a live cell has less than 2 cell neighbors with life, or has more than 3 cell with life, this cell go dead.
 - If a dead cell has exactly 3 cell neighbors with life, this cell revive
+
 Simple work, complex evolution..
 
 ## How does it work?
